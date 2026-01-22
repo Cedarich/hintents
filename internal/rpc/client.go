@@ -9,14 +9,14 @@ import (
 
 // Client handles interactions with the Stellar Network
 type Client struct {
-	Horizon *horizonclient.Client
+	Horizon horizonclient.ClientInterface
 }
 
 // NewClient creates a new RPC client (defaults to Public Network for now)
 func NewClient() *Client {
-	return &Client{
-		Horizon: horizonclient.DefaultPublicNetClient,
-	}
+       return &Client{
+	       Horizon: horizonclient.DefaultPublicNetClient,
+       }
 }
 
 // TransactionResponse contains the raw XDR fields needed for simulation
