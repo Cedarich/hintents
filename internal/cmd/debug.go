@@ -25,7 +25,7 @@ func NewDebugCommand(runner simulator.RunnerInterface) *cobra.Command {
 }
 
 func (d *DebugCommand) createCommand() *cobra.Command {
-	return &cobra.Command{
+	cmd := &cobra.Command{
 		Use:   "debug <transaction-hash>",
 		Short: "Debug a failed Soroban transaction",
 		Long: `Fetch a transaction envelope from the Stellar network and prepare it for simulation.
@@ -45,6 +45,12 @@ Example:
 		},
 		RunE: d.runDebug,
 	}
+	
+	// Set up flags
+	cmd.Flags().StringVarP(&networkFlag, "network", "n", string(rpc.Mainnet), "Stellar network to use (testnet, mainnet, futurenet)")
+	cmd.Flags().StringVar(&rpcURLFlag, "rpc-url", "", "Custom Horizon RPC URL to use")
+	
+	return cmd
 }
 
 func (d *DebugCommand) runDebug(cmd *cobra.Command, args []string) error {
