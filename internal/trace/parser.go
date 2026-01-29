@@ -3,12 +3,18 @@ package trace
 import (
 	"fmt"
 	"strings"
-
-	"github.com/dotandev/hintents/internal/simulator"
 )
 
+// SimulationResponse represents a simulation response (to avoid import cycle)
+type SimulationResponse struct {
+	Status string
+	Error  string
+	Events []string
+	Logs   []string
+}
+
 // ParseSimulationResponse converts a simulation response into a trace tree
-func ParseSimulationResponse(resp *simulator.SimulationResponse) (*TraceNode, error) {
+func ParseSimulationResponse(resp *SimulationResponse) (*TraceNode, error) {
 	if resp == nil {
 		return nil, fmt.Errorf("simulation response is nil")
 	}

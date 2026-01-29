@@ -3,13 +3,12 @@ package trace
 import (
 	"testing"
 
-	"github.com/dotandev/hintents/internal/simulator"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
 
 func TestParseSimulationResponse_Success(t *testing.T) {
-	resp := &simulator.SimulationResponse{
+	resp := &SimulationResponse{
 		Status: "success",
 		Events: []string{
 			"contract: CDLZFC3 fn: transfer",
@@ -34,7 +33,7 @@ func TestParseSimulationResponse_Success(t *testing.T) {
 }
 
 func TestParseSimulationResponse_WithError(t *testing.T) {
-	resp := &simulator.SimulationResponse{
+	resp := &SimulationResponse{
 		Status: "error",
 		Error:  "Contract execution failed",
 		Events: []string{},
